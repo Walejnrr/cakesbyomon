@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Cakes by Omon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // THIS CONFIG OBJECT MUST COME *AFTER* THE SCRIPT TAG FOR THE CDN
+  tailwind.config = {
+    darkMode: 'class', // <--- This tells Tailwind to look for the 'dark' class
+    theme: {
+      extend: {
+        // Re-add your custom colors here so Tailwind can use them with 'dark:'
+        colors: {
+          rose: {
+            50: '#FFF1F2',
+            100: '#FFE4E6',
+            200: '#FECDD6',
+            300: '#FDA4AF',
+            400: '#FB7185',
+            500: '#F43F5E',
+            600: '#E11D48',
+            700: '#BE123C',
+            800: '#9F1239',
+            900: '#881337',
+            950: '#4C0519',
+          },
+          purple: { // Kept for reference but not primarily used in this palette
+            50: '#F5F3FF',
+            100: '#EDE9FE',
+            200: '#DDD6FE',
+            300: '#C4B5FD',
+            400: '#A78BFA',
+            500: '#8B5CF6',
+            600: '#7C3AED',
+            700: '#6D28D9',
+            800: '#5B21B6',
+            900: '#4C1D95',
+            950: '#2F0854',
+          },
+          // NEW COLORS FROM contact.html
+          mint: {
+            50: '#F0FFF4', 100: '#D1FAE5', 200: '#A7F3D0', 300: '#77EDBB', 400: '#4CE0A6',
+            500: '#26CC91', 600: '#1BA37A', 700: '#147A60', 800: '#0C5242', 900: '#052A29', 950: '#031715',
+          },
+          cream: '#FFFDD0', // Custom cream color
+          lightpink: '#FFDCE2', // Custom light pink
+          sky: { // Example light blue
+            50: '#F0F9FF', 100: '#E0F2FE', 200: '#BAE6FD', 300: '#7DD3FC', 400: '#38BDF8',
+            500: '#0EA5E9', 600: '#0284C7', 700: '#0369A1', 800: '#075985', 900: '#0C4A6E', 950: '#082F49',
+          }
+        },
+      },
+    },
+  }
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    .brand-logo {
+      font-family: 'Pacifico', cursive;
+    }
+    /* Apply Pacifico to specific header elements, not all header content */
+    header .brand-logo,
+    header nav a {
+      font-family: 'Pacifico', cursive;
+    }
+    /* Ensure the main heading on the page uses Pacifico */
+    .about-business-dynamic-bg h3,
+    .meet-the-baker-heading {
+      font-family: 'Pacifico', cursive;
+    }
+    header h1 { /* This rule is likely not used directly on this page for a h1 */
+        font-size: 3.5rem;
+        line-height: 1.2;
+    }
+  
+    /* --- Dynamic Background for 'About the Business' section (MORE FLUID ANIMATION + NAV BAR COLORS) --- */
+    .about-business-dynamic-bg {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem; /* Matches parent section's rounded-xl */
+      padding: 3rem 1.5rem; /* Matching py-12 px-6 of original section */
+      margin-bottom: 3rem; /* Space between this and 'Meet the Baker' */
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind's shadow-md */
+  
+      /* Light mode gradient - Using sky and rose shades */
+      background: linear-gradient(
+        -45deg, /* Start from bottom-right */
+        #7DD3FC, /* sky-300 */
+        #38BDF8, /* sky-400 */
+        #FB7185, /* rose-400 */
+        #E11D48  /* rose-600 */
+      );
+      background-size: 600% 600%; /* Much larger background for smooth, expansive movement */
+      animation: fluidGradientLight 15s ease-in-out infinite alternate; /* Slower, smoother, more fluid animation */
+    }
+  
+    /* Dark mode gradient - Deeper shades of sky and rose */
+    .dark .about-business-dynamic-bg {
+      background: linear-gradient(
+        -45deg, /* Start from bottom-right */
+        #0C4A6E, /* sky-900 */
+        #082F49, /* sky-950 */
+        #881337, /* rose-900 */
+        #4C0519  /* rose-950 */
+      );
+      background-size: 600% 600%;
+      animation: fluidGradientDark 15s ease-in-out infinite alternate;
+    }
+  
+    /* Ensure text is white/light on these gradient backgrounds */
+    .about-business-dynamic-bg h3,
+    .about-business-dynamic-bg p {
+      color: white; /* For light mode on the vibrant gradient */
+    }
+  
+    .dark .about-business-dynamic-bg h3,
+    .dark .about-business-dynamic-bg p {
+      color: #E5E7EB; /* Tailwind's gray-200 for dark mode */
+    }
+  
+    /* Keyframes for fluid light mode gradient animation */
+    @keyframes fluidGradientLight {
+      0% {
+        background-position: 0% 0%; /* Start top-left */
+      }
+      100% {
+        background-position: 100% 100%; /* Move to bottom-right */
+      }
+    }
+  
+    /* Keyframes for fluid dark mode gradient animation */
+    @keyframes fluidGradientDark {
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 100% 100%;
+      }
+    }
+    /* --- END Dynamic Background CSS --- */
+  </style>
+</head>
+<body class="bg-cream text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+  <header class="bg-lightpink dark:bg-gray-800 p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="index.html" class="brand-logo text-rose-700 dark:text-white text-3xl font-extrabold rounded-md p-2 hover:bg-rose-100 dark:hover:bg-gray-950 transition transform hover:scale-105">
+        Cakes by Omon
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-6">
+        <a href="index.html" class="text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2">Home</a>
+        <a href="about.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2">About Us</a>
+        <a href="products.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2">View Products</a>
+        <a href="order.html" class="mx-3 text-sky-700 font-bold bg-rose-400 dark:bg-rose-500 hover:bg-rose-500 dark:hover:bg-rose-600 rounded-full py-2 px-5 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">Order Now</a>
+        <a href="contact.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2">Contact Us</a>
+
+        <button id="theme-toggle-desktop" class="text-rose-700 dark:text-white focus:outline-none p-2 rounded-full hover:bg-rose-100 dark:hover:bg-gray-950 transition transform hover:rotate-12">
+          <svg class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.675l-.707-.707M6.343 17.657l-.707-.707m12.728 0l-.707.707M6.343 6.343l-.707.707M12 18a6 6 0 100-12 6 6 0 000 12z"></path></svg>
+          <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+      </nav>
+
+      <button id="mobile-menu-button" class="md:hidden text-rose-700 dark:text-white focus:outline-none p-2 rounded-md hover:bg-rose-100 dark:hover:bg-gray-950 transition">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden hidden bg-rose-100 dark:bg-gray-950 mt-4 rounded-b-lg shadow-inner">
+      <a href="index.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition">Home</a>
+      <a href="about.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition">About Us</a>
+      <a href="products.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition">View Products</a>
+      <a href="order.html" class="block text-sky-700 font-bold bg-rose-400 dark:bg-rose-500 hover:bg-rose-500 dark:hover:bg-rose-600 py-3 px-4 transition">Order Now</a>
+      <a href="contact.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition">Contact Us</a>
+      <button id="theme-toggle-mobile" class="w-full text-left text-rose-700 dark:text-white focus:outline-none py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition flex items-center">
+        <svg class="w-6 h-6 mr-2 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.675l-.707-.707M6.343 17.657l-.707-.707m12.728 0l-.707.707M6.343 6.343l-.707.707M12 18a6 6 0 100-12 6 6 0 000 12z"></path></svg>
+        <svg class="w-6 h-6 mr-2 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        <span>Toggle Dark Mode</span>
+      </button>
+    </div>
+  </header>
+  <main class="max-w-5xl mx-auto p-6">
+    <section class="py-12 bg-sky-100 dark:bg-gray-800 rounded-xl shadow-lg text-gray-800 dark:text-gray-200">
+      <h2 class="sr-only">About Us Content</h2>
+      <div class="about-business-dynamic-bg text-white dark:text-gray-200 shadow-md">
+        <h3 class="text-4xl md:text-5xl font-bold text-center text-white dark:text-rose-300 mb-8 font-['Pacifico']">Our Story</h3>
+        <p class="text-center text-white dark:text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">Cakes by Omon is a home-based cake shop committed to delivering freshly baked, delicious, and beautifully crafted cakes made with love and quality ingredients. Our passion for baking turns every celebration into a sweet memory. We believe that every cake tells a story, and we're here to help you tell yours with a touch of sweetness and artistry.</p>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-sky-200 dark:border-sky-700">
+        <h3 class="meet-the-baker-heading text-3xl font-bold text-center text-rose-700 dark:text-rose-300 mb-8">Meet the Baker</h3>
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8 max-w-4xl mx-auto">
+          <div class="flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:w-1/2">
+            <img src="images/baker1.jpg" alt="Omon, the Baker" class="rounded-full w-48 h-48 sm:w-40 sm:h-40 object-cover shadow-lg mx-auto transform hover:scale-105 transition" onerror="this.onerror=null;this.src='https://placehold.co/200x200/E5E7EB/6B7280?text=Baker+1';" />
+            <img src="images/baker2.jpg" alt="Omon decorating a cake" class="rounded-full w-48 h-48 sm:w-40 sm:h-40 object-cover shadow-lg mx-auto transform hover:scale-105 transition" onerror="this.onerror=null;this.src='https://placehold.co/200x200/E5E7EB/6B7280?text=Baker+2';" />
+          </div>
+          <div class="md:w-1/2 text-center md:text-left">
+            <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+              Hello! I'm Omon, the heart and hands behind Cakes by Omon. My journey into baking began as a childhood passion, transforming into a love for creating edible art. With years of experience and a dedication to using only the finest ingredients, I pour my heart into every cake, ensuring it's as delicious as it is beautiful.
+            </p>
+            <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mt-4">
+              From classic flavors to custom designs, I love working with clients to bring their cake dreams to life. Whether it's a birthday, wedding, or just a sweet treat for a special moment, I'm honored to be a part of your celebrations. Thank you for choosing Cakes by Omon!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-lightpink dark:bg-gray-800 text-center p-6 text-rose-700 dark:text-white mt-8 shadow-inner">
+    <div class="container mx-auto">
+      <p class="text-lg">&copy; 2025 Cakes by Omon. All rights reserved.</p>
+      <p class="text-sm mt-2 opacity-80">Baked with love. Designed with Tailwind CSS.</p>
+      <div class="flex justify-center space-x-4 mt-4">
+          <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.636 7.747h-1.602v-1.12c0-.528.232-.876.883-.876h.714V7.52h-.86c-1.026 0-1.378.769-1.378 1.488v1.168h-1.666v1.98h1.666V18h2.002v-4.437h1.332l.199-1.98z"></path></svg>
+          </a>
+          <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-2.716 0-3.056.012-4.12.06A4.002 4.002 0 003.64 3.64C2.565 4.704 2.553 5.044 2.505 6.12A4.002 4.002 0 003.64 10.36c.048 1.076.06 1.416.06 4.12 0 2.716-.012 3.056-.06 4.12a4.002 4.002 0 001.12 3.48c1.064 1.064 1.404 1.076 4.12 1.124 2.716.048 3.056.06 4.12.06s1.404-.012 4.12-.06a4.002 4.002 0 003.48-1.12c1.064-1.064 1.076-1.404 1.124-4.12.048-2.716.06-3.056.06-4.12s-.012-1.404-.06-4.12a4.002 4.002 0 00-1.12-3.48c-1.064-1.064-1.404-1.076-4.12-1.124-2.716-.048-3.056-.06-4.12-.06zm0 2.378c2.66 0 2.956.01 4.008.058a2.532 2.532 0 012.046.852 2.532 2.532 0 01.852 2.046c.048 1.052.058 1.348.058 4.008s-.01 2.956-.058 4.008a2.532 2.532 0 01-.852 2.046 2.532 2.532 0 01-2.046.852c-1.052.048-1.348.058-4.008.058s-2.956-.01-4.008-.058a2.532 2.532 0 01-2.046-.852 2.532 2.532 0 01-.852-2.046c-.048-1.052-.058-1.348-.058-4.008s.01-2.956.058-4.008a2.532 2.532 0 01.852-2.046A2.532 2.532 0 018.008 4.378c1.052-.048 1.348-.058 4.008-.058zm0 3.82c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5zM17.25 5.5A1.25 1.25 0 1017.25 8a1.25 1.25 0 000-2.5z"></path></svg>
+          </a>
+          <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.321 7.218c-.461.205-.956.344-1.472.417.53-.318.939-.824 1.134-1.424-.496.294-1.047.508-1.632.624-.469-.499-1.14-.81-1.884-.81-1.424 0-2.585 1.161-2.585 2.585 0 .202.023.398.067.587-2.15-.108-4.057-1.139-5.334-2.705-.224.385-.353.83-.353 1.304 0.89.455 1.88.784 2.932.969-.214.607-.525 1.176-.957 1.638-.568.614-1.282 1.096-2.072 1.442-.016.007-.032.012-.047.019.006.07.01.137.01.206 0 2.804 1.996 5.123 4.646 5.642-.486.132-.998.204-1.527.204-.374 0-.737-.034-1.09-.092.74 2.302 2.88 3.978 5.42 4.025-1.986 1.556-4.49 2.487-7.218 2.487-.47 0-.936-.027-1.392-.08.775 2.41 2.296 4.38 4.07 5.75C17.753 22.378 22 17.778 22 12c0-.188-.009-.374-.027-.56z"></path></svg>
+          </a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // --- Mobile Menu Toggle ---
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+      }
+
+      // --- Dark Mode Toggle ---
+      const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+      const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+      const htmlElement = document.documentElement;
+
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+
+      function toggleDarkMode() {
+        if (htmlElement.classList.contains('dark')) {
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      }
+
+      if (themeToggleDesktop) {
+        themeToggleDesktop.addEventListener('click', toggleDarkMode);
+      }
+      if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', toggleDarkMode);
+      }
+
+      // --- Jumbotron Image Rotation (Not needed on about.html, but harmless if present) ---
+      const jumbotronImage = document.getElementById('jumbotron-image');
+      if (jumbotronImage) {
+          const images = [
+              "images/cake1.jpg",
+              "images/cake2.jpg",
+          ];
+          let currentIndex = 0;
+
+          function imagesWithCacheBuster(imageArray, index) {
+              if (imageArray && typeof index === 'number' && index >= 0 && index < imageArray.length) {
+                  return imageArray[index] + '?' + Date.now();
+              }
+              return '';
+          }
+
+          function changeImage() {
+              jumbotronImage.style.opacity = 0;
+              setTimeout(() => {
+                  currentIndex = (currentIndex + 1) % images.length;
+                  jumbotronImage.src = imagesWithCacheBuster(images, currentIndex);
+                  jumbotronImage.style.opacity = 1;
+              }, 500);
+          }
+          setInterval(changeImage, 4000);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products - Cakes by Omon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  // THIS CONFIG OBJECT MUST COME *AFTER* THE SCRIPT TAG FOR THE CDN
+  tailwind.config = {
+    darkMode: 'class', // <--- This tells Tailwind to look for the 'dark' class
+    theme: {
+      extend: {
+        // Re-add your custom colors here so Tailwind can use them with 'dark:'
+        colors: {
+          rose: {
+            50: '#FFF1F2',
+            100: '#FFE4E6',
+            200: '#FECDD6',
+            300: '#FDA4AF',
+            400: '#FB7185',
+            500: '#F43F5E',
+            600: '#E11D48',
+            700: '#BE123C',
+            800: '#9F1239',
+            900: '#881337',
+            950: '#4C0519',
+          },
+          purple: {
+            50: '#F5F3FF',
+            100: '#EDE9FE',
+            200: '#DDD6FE',
+            300: '#C4B5FD',
+            400: '#A78BFA',
+            500: '#8B5CF6',
+            600: '#7C3AED',
+            700: '#6D28D9',
+            800: '#5B21B6',
+            900: '#4C1D95',
+            950: '#2F0854',
+          },
+          // NEW COLORS FOR OPTION 3
+          cream: '#FFFDD0', // Custom cream color
+          lightpink: '#FFDCE2', // Custom light pink
+          sky: { // Tailwind's default blue palette
+            50: '#F0F9FF', 100: '#E0F2FE', 200: '#BAE6FD', 300: '#7DD3FC', 400: '#38BDF8',
+            500: '#0EA5E9', 600: '#0284C7', 700: '#0369A1', 800: '#075985', 900: '#0C4A6E', 950: '#082F49',
+          }
+        },
+      },
+    },
+  }
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    .brand-logo,
+    .jumbotron-overlay h3 {
+      font-family: 'Pacifico', cursive;
+    }
+    header h1,
+    header p {
+      font-family: 'Pacifico', cursive;
+    }
+    header nav a {
+      font-family: 'Pacifico', cursive;
+    }
+    header h1 {
+        font-size: 3.5rem;
+        line-height: 1.2;
+    }
+
+    /* Custom CSS for Cart Sidebar */
+    .cart-sidebar {
+        right: -100%; /* Start off-screen */
+        transition: right 0.3s ease-in-out;
+    }
+    .cart-sidebar.open {
+        right: 0; /* Slide in */
+    }
+
+    /* No jumbotron-specific CSS needed for this page */
+  </style>
+</head>
+<body class="bg-cream text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <header class="bg-lightpink dark:bg-gray-800 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+          <a href="index.html" class="brand-logo text-rose-700 dark:text-white text-3xl font-extrabold rounded-md p-2 hover:bg-rose-100 dark:hover:bg-gray-950 transition transform hover:scale-105 font-['Pacifico']">
+            Cakes by Omon
+          </a>
+      
+          <nav class="hidden md:flex items-center space-x-6">
+            <a href="index.html" class="text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2 font-['Pacifico']">Home</a>
+            <a href="about.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2 font-['Pacifico']">About Us</a>
+            <a href="products.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2 font-['Pacifico']">View Products</a>
+            <a href="order.html" class="mx-3 text-sky-700 font-bold bg-rose-400 dark:bg-rose-500 hover:bg-rose-500 dark:hover:bg-rose-600 rounded-full py-2 px-5 transition shadow-md hover:shadow-lg transform hover:-translate-y-1 font-['Pacifico']">Order Now</a>
+            <a href="contact.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2 font-['Pacifico']">Contact Us</a>
+      
+            <button id="theme-toggle-desktop" class="text-rose-700 dark:text-white focus:outline-none p-2 rounded-full hover:bg-rose-100 dark:hover:bg-gray-950 transition transform hover:rotate-12">
+              <svg class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.675l-.707-.707M6.343 17.657l-.707-.707m12.728 0l-.707.707M6.343 6.343l-.707.707M12 18a6 6 0 100-12 6 6 0 000 12z"></path></svg>
+              <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            </button>
+      
+            <button id="cart-toggle-desktop" class="relative text-rose-700 dark:text-white focus:outline-none p-2 rounded-full hover:bg-rose-100 dark:hover:bg-gray-950 transition transform hover:scale-110">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3m14 8a2 2 0 100 4 2 2 0 000-4zm-8 4a2 2 0 100 4 2 2 0 000-4z"></path></svg>
+                <span id="cart-count-desktop" class="absolute top-0 right-0 bg-rose-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center -mt-1 -mr-1">0</span>
+            </button>
+      
+          </nav>
+      
+          <button id="mobile-menu-button" class="md:hidden text-rose-700 dark:text-white focus:outline-none p-2 rounded-md hover:bg-rose-100 dark:hover:bg-gray-950 transition">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </button>
+        </div>
+      
+        <div id="mobile-menu" class="md:hidden hidden bg-rose-100 dark:bg-gray-950 mt-4 rounded-b-lg shadow-inner">
+          <a href="index.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition font-['Pacifico']">Home</a>
+          <a href="about.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition font-['Pacifico']">About Us</a>
+          <a href="products.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition font-['Pacifico']">View Products</a>
+          <a href="order.html" class="block text-sky-700 font-bold bg-rose-400 dark:bg-rose-500 hover:bg-rose-500 dark:hover:bg-rose-600 py-3 px-4 transition font-['Pacifico']">Order Now</a>
+          <a href="contact.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition font-['Pacifico']">Contact Us</a>
+          
+          <button id="cart-toggle-mobile" class="w-full text-left text-rose-700 dark:text-white focus:outline-none py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition flex items-center font-['Pacifico']">
+              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5H3m14 8a2 2 0 100 4 2 2 0 000-4zm-8 4a2 2 0 100 4 2 2 0 000-4z"></path></svg>
+              <span>View Cart <span id="cart-count-mobile" class="ml-2 bg-rose-500 text-white text-xs rounded-full h-4 w-4 inline-flex items-center justify-center">0</span></span>
+          </button>
+      
+          <button id="theme-toggle-mobile" class="w-full text-left text-rose-700 dark:text-white focus:outline-none py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition flex items-center font-['Pacifico']">
+            <svg class="w-6 h-6 mr-2 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.675l-.707-.707M6.343 17.657l-.707-.707m12.728 0l-.707.707M6.343 6.343l-.707.707M12 18a6 6 0 100-12 6 6 0 000 12z"></path></svg>
+            <svg class="w-6 h-6 mr-2 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            <span>Toggle Dark Mode</span>
+          </button>
+        </div>
+      </header>
+
+  <main class="max-w-5xl mx-auto p-6">
+    <section class="py-12 bg-sky-100 dark:bg-gray-800 rounded-xl shadow-lg text-gray-800 dark:text-gray-200 mb-8">
+      <h2 class="text-4xl md:text-5xl font-bold text-center text-rose-700 dark:text-rose-300 mb-8 font-['Pacifico']">Our Cakes</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center px-4">
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="layer-1-cake" data-product-name="1 Layer Cake">
+          <img src="images/layer1.jpg" alt="Chocolate Fudge Cake" class="w-full h-48 object-cover rounded-md mb-4">
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">1 Layer Cake</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">Rich, decadent cake with a creamy fudge frosting. A classic favorite!</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-chocolate-fudge" class="sr-only">Quantity</label>
+            <input type="number" id="qty-chocolate-fudge" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="vanilla-sponge" data-product-name="Vanilla Sponge Cake">
+          <img src="images/bento.jpg" alt="Bento Cake" class="w-full h-48 object-cover rounded-md mb-4">
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">Bento Cake</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">Light and airy vanilla sponge, perfect with fresh cream and berries.</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-vanilla-sponge" class="sr-only">Quantity</label>
+            <input type="number" id="qty-vanilla-sponge" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="red-velvet" data-product-name="Red Velvet Cake">
+          <img src="images/red_velvet.jpg" alt="Red Velvet Cake" class="w-full h-48 object-cover rounded-md mb-4">
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">Red Velvet Cake</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">Classic red velvet with a tangy cream cheese frosting. A true delight!</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-red-velvet" class="sr-only">Quantity</label>
+            <input type="number" id="qty-red-velvet" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="fruit-cake" data-product-name="Fruit Cake">
+          <img src="images/fruit_cake.jpg" alt="Fruit Cake" class="w-full h-48 object-cover rounded-md mb-4">
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">Fruit Cake</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">Moist fruit cake packed with candied fruits and nuts, perfect for holidays.</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-fruit-cake" class="sr-only">Quantity</label>
+            <input type="number" id="qty-fruit-cake" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="celebration-cake" data-product-name="Birthday & Celebration Cakes">
+          <img src="images/celebration_cake.jpg" alt="Celebration Cake" class="w-full h-48 object-cover rounded-md mb-4">
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">Birthday & Celebration Cakes</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">Custom-designed cakes for birthdays, weddings, and special events. Your vision, our creation!</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-celebration-cake" class="sr-only">Quantity</label>
+            <input type="number" id="qty-celebration-cake" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 bg-sky-100 dark:bg-gray-800 rounded-xl shadow-lg text-gray-800 dark:text-gray-200">
+      <h2 class="text-4xl md:text-5xl font-bold text-center text-rose-700 dark:text-rose-300 mb-8 font-['Pacifico']">Our Pastries</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center px-4">
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="meat-pie" data-product-name="Meat Pie">
+          <img src="images/meat_pie.jpg" alt="Meat Pie" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/400x200/E5E7EB/6B7280?text=Meat+Pie';" />
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">Delicious Meat Pies</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">Savory pastry filled with spiced minced meat and vegetables.</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-meat-pie" class="sr-only">Quantity</label>
+            <input type="number" id="qty-meat-pie" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="chicken-pie" data-product-name="Chicken Pie">
+          <img src="images/chicken_pie.jpg" alt="Chicken Pie" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/400x200/E5E7EB/6B7280?text=Chicken+Pie';" />
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">Hearty Chicken Pies</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">Flaky pastry filled with tender chicken and creamy sauce.</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-chicken-pie" class="sr-only">Quantity</label>
+            <input type="number" id="qty-chicken-pie" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="small-chops" data-product-name="Small Chops">
+          <img src="images/small_chops.jpg" alt="Small Chops" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/400x200/E5E7EB/6B7280?text=Small+Chops';" />
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">Assorted Small Chops</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">A delightful mix of spring rolls, samosas, puff-puff, and gizzards.</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-small-chops" class="sr-only">Quantity</label>
+            <input type="number" id="qty-small-chops" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-xl transition transform hover:-translate-y-1" data-product-id="cupcakes" data-product-name="Gourmet Cupcakes">
+          <img src="images/cupcakes.jpg" alt="Cupcakes" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/400x200/E5E7EB/6B7280?text=Cupcakes';" />
+          <h3 class="text-xl font-semibold text-rose-700 dark:text-rose-300 mb-2">Gourmet Cupcakes</h3>
+          <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">Perfectly portioned cupcakes in various flavors and designs.</p>
+          <p class="text-lg font-bold text-sky-700 dark:text-sky-400 mb-4">Price: ₦<span class="product-price" data-price="0">0.00</span></p>
+          <div class="flex items-center justify-center space-x-2 mb-4">
+            <label for="qty-cupcakes" class="sr-only">Quantity</label>
+            <input type="number" id="qty-cupcakes" min="1" value="1" class="item-quantity w-20 p-2 border border-gray-300 dark:border-gray-600 rounded-md text-center bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            <button class="add-to-cart-btn bg-rose-400 dark:bg-rose-500 text-sky-700 px-5 py-2 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-lightpink dark:bg-gray-800 text-center p-6 text-rose-700 dark:text-white mt-8 shadow-inner">
+    <div class="container mx-auto">
+      <p class="text-lg">&copy; 2025 Cakes by Omon. All rights reserved.</p>
+      <p class="text-sm mt-2 opacity-80">Baked with love. Designed with Tailwind CSS.</p>
+      <div class="flex justify-center space-x-4 mt-4">
+          <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.636 7.747h-1.602v-1.12c0-.528.232-.876.883-.876h.714V7.52h-.86c-1.026 0-1.378.769-1.378 1.488v1.168h-1.666v1.98h1.666V18h2.002v-4.437h1.332l.199-1.98z"></path></svg>
+          </a>
+          <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-2.716 0-3.056.012-4.12.06A4.002 4.002 0 003.64 3.64C2.565 4.704 2.553 5.044 2.505 6.12A4.002 4.002 0 003.64 10.36c.048 1.076.06 1.416.06 4.12 0 2.716-.012 3.056-.06 4.12a4.002 4.002 0 001.12 3.48c1.064 1.064 1.404 1.076 4.12 1.124 2.716.048 3.056.06 4.12.06s1.404-.012 4.12-.06a4.002 4.002 0 003.48-1.12c1.064-1.064 1.076-1.404 1.124-4.12.048-2.716.06-3.056.06-4.12s-.012-1.404-.06-4.12a4.002 4.002 0 00-1.12-3.48c-1.064-1.064-1.404-1.076-4.12-1.124-2.716-.048-3.056-.06-4.12-.06zm0 2.378c2.66 0 2.956.01 4.008.058a2.532 2.532 0 012.046.852 2.532 2.532 0 01.852 2.046c.048 1.052.058 1.348.058 4.008s-.01 2.956-.058 4.008a2.532 2.532 0 01-.852 2.046 2.532 2.532 0 01-2.046.852c-1.052.048-1.348.058-4.008.058s-2.956-.01-4.008-.058a2.532 2.532 0 01-2.046-.852 2.532 2.532 0 01-.852-2.046c-.048-1.052-.058-1.348-.058-4.008s.01-2.956.058-4.008a2.532 2.532 0 01.852-2.046A2.532 2.532 0 018.008 4.378c1.052-.048 1.348-.058 4.008-.058zm0 3.82c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5zM17.25 5.5A1.25 1.25 0 1017.25 8a1.25 1.25 0 000-2.5z"></path></svg>
+          </a>
+          <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.321 7.218c-.461.205-.956.344-1.472.417.53-.318.939-.824 1.134-1.424-.496.294-1.047.508-1.632.624-.469-.499-1.14-.81-1.884-.81-1.424 0-2.585 1.161-2.585 2.585 0 .202.023.398.067.587-2.15-.108-4.057-1.139-5.334-2.705-.224.385-.353.83-.353 1.304 0.89.455 1.88.784 2.932.969-.214.607-.525 1.176-.957 1.638-.568.614-1.282 1.096-2.072 1.442-.016.007-.032.012-.047.019.006.07.01.137.01.206 0 2.804 1.996 5.123 4.646 5.642-.486.132-.998.204-1.527.204-.374 0-.737-.034-1.09-.092.74 2.302 2.88 3.978 5.42 4.025-1.986 1.556-4.49 2.487-7.218 2.487-.47 0-.936-.027-1.392-.08.775 2.41 2.296 4.38 4.07 5.75C17.753 22.378 22 17.778 22 12c0-.188-.009-.374-.027-.56z"></path></svg>
+          </a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="cart-sidebar" class="cart-sidebar fixed top-0 w-80 h-full bg-white dark:bg-gray-800 shadow-xl z-50 p-6 flex flex-col">
+    <div class="flex justify-between items-center border-b pb-4 mb-4 border-gray-200 dark:border-gray-700">
+      <h3 class="text-2xl font-bold text-rose-700 dark:text-rose-300">Your Cart</h3>
+      <button id="close-cart-btn" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-3xl font-bold">&times;</button>
+    </div>
+    <div id="cart-items" class="flex-grow overflow-y-auto">
+      <p id="empty-cart-message" class="text-gray-500 dark:text-gray-400">Your cart is empty.</p>
+    </div>
+    <div class="border-t pt-4 mt-4 border-gray-200 dark:border-gray-700">
+      <div class="flex justify-between items-center text-xl font-bold mb-4">
+        <span>Total:</span>
+        <span>₦<span id="cart-total">0.00</span></span>
+      </div>
+      <button id="checkout-btn" class="w-full bg-rose-400 dark:bg-rose-500 text-sky-700 py-3 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md">Proceed to Checkout</button>
+      <button id="clear-cart-btn" class="w-full mt-2 bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-2 rounded-full hover:bg-gray-400 dark:hover:bg-gray-600 transition shadow-md">Clear Cart</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // --- Theme Toggle (Existing) ---
+      const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+      const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+      const htmlElement = document.documentElement;
+
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+
+      function toggleDarkMode() {
+        if (htmlElement.classList.contains('dark')) {
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      }
+
+      if (themeToggleDesktop) {
+        themeToggleDesktop.addEventListener('click', toggleDarkMode);
+      }
+      if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', toggleDarkMode);
+      }
+
+      // --- Mobile Menu Toggle (Existing) ---
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+      }
+
+      // --- Product Prices Configuration ---
+      // IMPORTANT: Fill in your actual prices here!
+      const productPrices = {
+        'layer-1-cake': 15000.00,
+        'vanilla-sponge': 11000.00,
+        'red-velvet': 16000.00,
+        'fruit-cake': 18000.00,
+        'celebration-cake': 25000.00, // Starting price for custom cakes
+        'meat-pie': 1500.00,
+        'chicken-pie': 1800.00,
+        'small-chops': 5000.00, // Price for a standard pack/portion
+        'cupcakes': 1000.00 // Price per cupcake
+      };
+
+      // Set prices on page load
+      document.querySelectorAll('.product-price').forEach(span => {
+        const productId = span.closest('[data-product-id]').dataset.productId;
+        const price = productPrices[productId] || 0;
+        span.dataset.price = price;
+        span.textContent = price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      });
+
+
+      // --- Cart System Logic ---
+      const cartSidebar = document.getElementById('cart-sidebar');
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalSpan = document.getElementById('cart-total');
+      const emptyCartMessage = document.getElementById('empty-cart-message');
+      const desktopCartCount = document.getElementById('cart-count-desktop');
+      const mobileCartCount = document.getElementById('cart-count-mobile');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const clearCartBtn = document.getElementById('clear-cart-btn');
+
+      let cart = []; // Array to hold cart items
+
+      // Function to save cart to localStorage
+      function saveCart() {
+        localStorage.setItem('shoppingCart', JSON.stringify(cart));
+      }
+
+      // Function to load cart from localStorage
+      function loadCart() {
+        const storedCart = localStorage.getItem('shoppingCart');
+        if (storedCart) {
+          cart = JSON.parse(storedCart);
+        }
+      }
+
+      // Function to render cart items in the sidebar
+      function renderCart() {
+        cartItemsContainer.innerHTML = ''; // Clear current items
+        let total = 0;
+
+        if (cart.length === 0) {
+          emptyCartMessage.style.display = 'block';
+          checkoutBtn.disabled = true;
+          clearCartBtn.disabled = true;
+        } else {
+          emptyCartMessage.style.display = 'none';
+          checkoutBtn.disabled = false;
+          clearCartBtn.disabled = false;
+          cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.classList.add('flex', 'items-center', 'justify-between', 'py-3', 'border-b', 'border-gray-100', 'dark:border-gray-700');
+            cartItemDiv.innerHTML = `
+              <div>
+                <h4 class="font-semibold text-gray-800 dark:text-gray-200">${item.name}</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">₦${item.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} x ${item.quantity}</p>
+              </div>
+              <div class="flex items-center space-x-2">
+                <button data-id="${item.id}" data-action="decrease" class="cart-qty-btn bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">-</button>
+                <span class="text-gray-800 dark:text-gray-200 font-medium">${item.quantity}</span>
+                <button data-id="${item.id}" data-action="increase" class="cart-qty-btn bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">+</button>
+                <button data-id="${item.id}" data-action="remove" class="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 ml-2">&times;</button>
+              </div>
+            `;
+            cartItemsContainer.appendChild(cartItemDiv);
+          });
+        }
+
+        cartTotalSpan.textContent = total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        desktopCartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        mobileCartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        saveCart(); // Save cart state after rendering
+      }
+
+      // Add to Cart functionality
+      document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', (event) => {
+          const productCard = event.target.closest('[data-product-id]');
+          const productId = productCard.dataset.productId;
+          const productName = productCard.dataset.productName;
+          const productPrice = parseFloat(productCard.querySelector('.product-price').dataset.price);
+          const quantityInput = productCard.querySelector('.item-quantity');
+          const quantity = parseInt(quantityInput.value);
+
+          const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+          if (existingItemIndex > -1) {
+            // Update quantity if item already in cart
+            cart[existingItemIndex].quantity += quantity;
+          } else {
+            // Add new item to cart
+            cart.push({
+              id: productId,
+              name: productName,
+              price: productPrice,
+              quantity: quantity
+            });
+          }
+          renderCart();
+          cartSidebar.classList.add('open'); // Open cart sidebar when item is added
+        });
+      });
+
+      // Cart sidebar toggle
+      document.getElementById('cart-toggle-desktop').addEventListener('click', () => {
+        cartSidebar.classList.toggle('open');
+        mobileMenu.classList.add('hidden'); // Close mobile menu if open
+      });
+      document.getElementById('cart-toggle-mobile').addEventListener('click', () => {
+        cartSidebar.classList.toggle('open');
+        mobileMenu.classList.add('hidden'); // Close mobile menu if open
+      });
+      document.getElementById('close-cart-btn').addEventListener('click', () => {
+        cartSidebar.classList.remove('open');
+      });
+
+      // Handle quantity changes and item removal in cart
+      cartItemsContainer.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.classList.contains('cart-qty-btn')) {
+          const itemId = target.dataset.id;
+          const action = target.dataset.action;
+          const itemIndex = cart.findIndex(item => item.id === itemId);
+
+          if (itemIndex > -1) {
+            if (action === 'increase') {
+              cart[itemIndex].quantity++;
+            } else if (action === 'decrease') {
+              cart[itemIndex].quantity--;
+              if (cart[itemIndex].quantity <= 0) {
+                cart.splice(itemIndex, 1); // Remove if quantity drops to 0 or less
+              }
+            }
+          }
+          renderCart();
+        } else if (target.dataset.action === 'remove') {
+          const itemId = target.dataset.id;
+          cart = cart.filter(item => item.id !== itemId);
+          renderCart();
+        }
+      });
+
+      // Clear Cart button
+      clearCartBtn.addEventListener('click', () => {
+        cart = [];
+        renderCart();
+      });
+
+      // Initial load and render cart
+      loadCart();
+      renderCart();
+    });
+  </script>
+</body>
+</html>

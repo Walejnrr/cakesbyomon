@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - Cakes by Omon</title> 
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            rose: {
+              50: '#FFF1F2', 100: '#FFE4E6', 200: '#FECDD6', 300: '#FDA4AF', 400: '#FB7185',
+              500: '#F43F5E', 600: '#E11D48', 700: '#BE123C', 800: '#9F1239', 900: '#881337', 950: '#4C0519',
+            },
+            purple: {
+              50: '#F5F3FF', 100: '#EDE9FE', 200: '#DDD6FE', 300: '#C4B5FD', 400: '#A78BFA',
+              500: '#8B5CF6', 600: '#7C3AED', 700: '#6D28D9', 800: '#5B21B6', 900: '#4C1D95', 950: '#2F0854',
+            },
+            // NEW COLORS FOR OPTION 2 & 3
+            mint: {
+              50: '#F0FFF4', 100: '#D1FAE5', 200: '#A7F3D0', 300: '#77EDBB', 400: '#4CE0A6',
+              500: '#26CC91', 600: '#1BA37A', 700: '#147A60', 800: '#0C5242', 900: '#052A29', 950: '#031715',
+            },
+            cream: '#FFFDD0', // Custom cream color
+            lightpink: '#FFDCE2', // Custom light pink for Option 3
+            sky: { // Example light blue for Option 3
+              50: '#F0F9FF', 100: '#E0F2FE', 200: '#BAE6FD', 300: '#7DD3FC', 400: '#38BDF8',
+              500: '#0EA5E9', 600: '#0284C7', 700: '#0369A1', 800: '#075985', 900: '#0C4A6E', 950: '#082F49',
+            }
+          },
+        },
+      },
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    /* Apply Pacifico to header elements (copied from index.html) */
+    .brand-logo { /* Only brand-logo is relevant for Pacifico in header on this page */
+      font-family: 'Pacifico', cursive;
+    }
+
+    /* Styles for header h1, p, nav a (copied from index.html) */
+    header h1,
+    header p {
+      font-family: 'Pacifico', cursive;
+    }
+    header nav a {
+      font-family: 'Pacifico', cursive;
+    }
+    header h1 {
+        font-size: 3.5rem; /* Adjust as needed */
+        line-height: 1.2;
+    }
+
+    /* No jumbotron-specific CSS needed for this page */
+
+    /* Removed padding-top from body as header is no longer fixed */
+  </style>
+</head>
+<body class="bg-cream text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+    <header class="bg-lightpink dark:bg-gray-800 p-4 shadow-lg">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="index.html" class="brand-logo text-rose-700 dark:text-white text-3xl font-extrabold rounded-md p-2 hover:bg-rose-100 dark:hover:bg-gray-950 transition transform hover:scale-105">
+          Cakes by Omon
+        </a>
+  
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="index.html" class="text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2">Home</a>
+          <a href="about.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2">About Us</a>
+          <a href="products.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2">View Products</a>
+          <a href="order.html" class="mx-3 text-sky-700 font-bold bg-rose-400 dark:bg-rose-500 hover:bg-rose-500 dark:hover:bg-rose-600 rounded-full py-2 px-5 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">Order Now</a>
+          <a href="contact.html" class="mx-3 text-rose-700 dark:text-white font-semibold hover:text-sky-500 dark:hover:text-sky-300 transition rounded-md p-2">Contact Us</a>
+  
+          <button id="theme-toggle-desktop" class="text-rose-700 dark:text-white focus:outline-none p-2 rounded-full hover:bg-rose-100 dark:hover:bg-gray-950 transition transform hover:rotate-12">
+            <svg class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.675l-.707-.707M6.343 17.657l-.707-.707m12.728 0l-.707.707M6.343 6.343l-.707.707M12 18a6 6 0 100-12 6 6 0 000 12z"></path></svg>
+            <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+        </nav>
+  
+        <button id="mobile-menu-button" class="md:hidden text-rose-700 dark:text-white focus:outline-none p-2 rounded-md hover:bg-rose-100 dark:hover:bg-gray-950 transition">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+  
+      <div id="mobile-menu" class="md:hidden hidden bg-rose-100 dark:bg-gray-950 mt-4 rounded-b-lg shadow-inner">
+        <a href="index.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition">Home</a>
+        <a href="about.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition">About Us</a>
+        <a href="products.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition">View Products</a>
+        <a href="order.html" class="block text-sky-700 font-bold bg-rose-400 dark:bg-rose-500 hover:bg-rose-500 dark:hover:bg-rose-600 py-3 px-4 transition">Order Now</a>
+        <a href="contact.html" class="block text-rose-700 dark:text-white font-semibold py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition">Contact Us</a>
+        <button id="theme-toggle-mobile" class="w-full text-left text-rose-700 dark:text-white focus:outline-none py-3 px-4 hover:bg-rose-200 dark:hover:bg-gray-800 transition flex items-center">
+          <svg class="w-6 h-6 mr-2 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.325-4.675l-.707-.707M6.343 17.657l-.707-.707m12.728 0l-.707.707M6.343 6.343l-.707.707M12 18a6 6 0 100-12 6 6 0 000 12z"></path></svg>
+          <svg class="w-6 h-6 mr-2 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          <span>Toggle Dark Mode</span>
+        </button>
+      </div>
+    </header>
+    <main class="max-w-5xl mx-auto p-6">
+      <section class="py-12 bg-sky-100 dark:bg-gray-800 rounded-xl shadow-lg text-gray-800 dark:text-gray-200">
+        <h2 class="text-4xl md:text-5xl font-bold text-rose-700 dark:text-rose-300 mb-8 font-['Pacifico']">Contact Us</h2>
+  
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
+          <div>
+            <h3 class="text-2xl font-bold text-rose-700 dark:text-rose-300 mb-6">Send Us a Message</h3>
+            <form id="contactForm" action="https://formspree.io/f/xjkwzzjo" method="POST" class="space-y-6">
+              <div>
+                <label for="contact_name" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Your Name</label>
+                <input type="text" id="contact_name" name="name" required class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition" />
+              </div>
+              <div>
+                <label for="contact_email" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Your Email</label>
+                <input type="email" id="contact_email" name="email" required class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition" />
+              </div>
+              <div>
+                <label for="message_type" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Message Type</label>
+                <select id="message_type" name="message_type" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition">
+                  <option value="Custom Order Inquiry">Custom Order Inquiry</option>
+                  <option value="Complaint">Complaint</option>
+                  <option value="Review / Feedback">Review / Feedback</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                </select>
+              </div>
+              <div>
+                <label for="message_content" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Your Message</label>
+                <textarea id="message_content" name="message" rows="6" required class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition" placeholder="Tell us about your custom order, complaint, review, or question..."></textarea>
+              </div>
+              <button type="submit" class="w-full bg-rose-400 dark:bg-rose-500 text-sky-700 dark:text-sky-200 font-bold py-3 px-6 rounded-full hover:bg-rose-500 dark:hover:bg-rose-600 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">Send Message</button>
+            </form>
+          </div>
+  
+          <div class="bg-sky-50 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+            <h3 class="text-2xl font-bold text-rose-700 dark:text-rose-300 mb-6">Our Contact Details</h3>
+            <div class="space-y-4 text-gray-700 dark:text-gray-300">
+              <p><strong>Address:</strong> 123 Sweet Street, Cakeville, Lagos, Nigeria</p>
+              <p><strong>Phone:</strong> +234 801 234 5678</p>
+              <p><strong>Email:</strong> info@cakesbyomon.com</p>
+  
+              <h4 class="text-xl font-semibold text-center text-rose-700 dark:text-rose-300 mt-6 mb-3">Find Us on Social Media</h4>
+              <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                    <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                        <img src="images/svg/snapchat.svg" alt="Snapchat" class="w-7 h-7" />
+                    </a>
+                </a>
+                <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                    <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                        <img src="images/svg/instagram.svg" alt="Instagram" class="w-7 h-7" />
+                    </a>
+                </a>
+                <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                    <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                        <img src="images/svg/tiktok.svg" alt="TikTok" class="w-7 h-7" />
+                    </a>
+                </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+    <footer class="bg-lightpink dark:bg-gray-800 text-center p-6 text-rose-700 dark:text-white mt-8 shadow-inner">
+      <div class="container mx-auto">
+        <p class="text-lg">&copy; 2025 Cakes by Omon. All rights reserved.</p>
+        <p class="text-sm mt-2 opacity-80">Baked with love. Designed with Tailwind CSS.</p>
+        <div class="flex justify-center space-x-4 mt-4">
+            <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                <img src="images/svg/snapchat.svg" alt="Snapchat" class="w-7 h-7" />
+            </a>
+            <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                <img src="images/svg/instagram.svg" alt="Instagram" class="w-7 h-7" />
+            </a>
+            <a href="#" class="text-rose-700 dark:text-white hover:text-sky-500 dark:hover:text-sky-300 transition transform hover:scale-110">
+                <img src="images/svg/tiktok.svg" alt="TikTok" class="w-7 h-7" />
+            </a>
+      </div>
+    </footer>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // --- Mobile Menu Toggle ---
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+      }
+
+      // --- Dark Mode Toggle ---
+      const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+      const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+      const htmlElement = document.documentElement; // This is the <html> tag
+
+      // Check local storage for theme preference on load
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+
+      function toggleDarkMode() {
+        if (htmlElement.classList.contains('dark')) {
+          htmlElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          htmlElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      }
+
+      // Attach event listeners if buttons exist
+      if (themeToggleDesktop) {
+        themeToggleDesktop.addEventListener('click', toggleDarkMode);
+      }
+      if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', toggleDarkMode);
+      }
+
+      // --- Jumbotron Image Rotation (Not needed on contact.html) ---
+      const jumbotronImage = document.getElementById('jumbotron-image');
+      if (jumbotronImage) {
+          const images = [
+              "images/cake1.jpg",
+              "images/cake2.jpg",
+          ];
+          let currentIndex = 0;
+
+          function imagesWithCacheBuster(imageArray, index) {
+              if (imageArray && typeof index === 'number' && index >= 0 && index < imageArray.length) {
+                  return imageArray[index] + '?' + Date.now();
+              }
+              return '';
+          }
+
+          function changeImage() {
+              jumbotronImage.style.opacity = 0;
+              setTimeout(() => {
+                  currentIndex = (currentIndex + 1) % images.length;
+                  jumbotronImage.src = imagesWithCacheBuster(images, currentIndex);
+                  jumbotronImage.style.opacity = 1;
+              }, 500);
+          }
+          setInterval(changeImage, 4000);
+      }
+
+      // --- Contact Form Specific JavaScript (UPDATED FOR FORMSPREE) ---
+      const contactForm = document.getElementById('contactForm');
+      const FORM_ENDPOINT = "https://formspree.io/f/xjkwzzjo"; // Your Formspree URL
+
+      if (contactForm) {
+          contactForm.addEventListener('submit', function(event) {
+              event.preventDefault(); // Prevent default form submission
+
+              const form = event.target;
+              const formData = new FormData(form);
+              const data = Object.fromEntries(formData.entries()); // Convert FormData to a plain object
+
+              fetch(FORM_ENDPOINT, {
+                  method: "POST",
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                  },
+                  body: JSON.stringify(data)
+              })
+              .then(response => {
+                  if (response.ok) {
+                      alert("Your message has been sent successfully! We'll get back to you soon.");
+                      form.reset(); // Clear the form
+                  } else {
+                      response.json().then(errorData => {
+                          alert(`There was an error sending your message: ${errorData.errors ? errorData.errors.map(e => e.message).join(', ') : 'Please try again.'}`);
+                          console.error('Formspree error details:', errorData);
+                      }).catch(() => {
+                          alert("There was an unknown error sending your message. Please try again.");
+                      });
+                  }
+              })
+              .catch(error => {
+                  alert("An unexpected error occurred. Please check your internet connection.");
+                  console.error('Fetch operation error:', error);
+              });
+          });
+      }
+    });
+  </script>
+</body>
+</html>
+
