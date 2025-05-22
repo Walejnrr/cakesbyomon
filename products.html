@@ -346,6 +346,29 @@
       <h3 class="text-2xl font-bold text-rose-700 dark:text-rose-300">Your Cart</h3>
       <button id="close-cart-btn" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-3xl font-bold">&times;</button>
     </div>
+    <div id="delivery-details-modal-overlay" class="modal-overlay">
+        <div class="checkout-modal bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+          <div class="flex justify-between items-center border-b pb-3 mb-4 border-gray-200 dark:border-gray-600">
+            <h3 class="text-2xl font-bold text-rose-700 dark:text-rose-300">Enter Delivery Details</h3>
+            <button id="close-delivery-modal-btn" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-3xl font-bold">&times;</button>
+          </div>
+          <form id="delivery-details-form" class="space-y-4">
+            <div>
+              <label for="customer-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Full Name:</label>
+              <input type="text" id="customer-name" name="customerName" required class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            </div>
+            <div>
+              <label for="delivery-address" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Delivery Address:</label>
+              <textarea id="delivery-address" name="deliveryAddress" rows="3" required class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></textarea>
+            </div>
+            <div>
+              <label for="phone-number" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number:</label>
+              <input type="tel" id="phone-number" name="phoneNumber" required class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            </div>
+            <button type="submit" id="submit-delivery-details-btn" class="w-full bg-sky-500 text-white py-3 rounded-full hover:bg-sky-600 transition shadow-md">Continue to Payment</button>
+          </form>
+        </div>
+      </div>
     <div id="cart-items" class="flex-grow overflow-y-auto">
       <p id="empty-cart-message" class="text-gray-500 dark:text-gray-400">Your cart is empty.</p>
     </div>
@@ -461,6 +484,15 @@
       const clearCartBtn = document.getElementById('clear-cart-btn');
 
       // NEW: Checkout Modal Elements
+    // NEW: Delivery Details Modal Elements
+      const deliveryDetailsModalOverlay = document.getElementById('delivery-details-modal-overlay');
+      const closeDeliveryModalBtn = document.getElementById('close-delivery-modal-btn');
+      const deliveryDetailsForm = document.getElementById('delivery-details-form');
+      const customerNameInput = document.getElementById('customer-name');
+      const deliveryAddressInput = document.getElementById('delivery-address');
+      const phoneNumberInput = document.getElementById('phone-number');
+
+      // NEW: Checkout Method Modal Elements (Existing, just moved for clarity)
       const checkoutModalOverlay = document.getElementById('checkout-modal-overlay');
       const closeCheckoutModalBtn = document.getElementById('close-checkout-modal-btn');
       const checkoutWhatsappBtn = document.getElementById('checkout-whatsapp-btn');
@@ -605,13 +637,63 @@
         cart = [];
         renderCart();
       });
+      // Close delivery details modal
+      closeDeliveryModalBtn.addEventListener('click', () => {
+        deliveryDetailsModalOverlay.classList.remove('open');
+        deliveryDetailsForm.reset(); // Clear the form fields
+      });
 
+      // Handle submission of delivery details form
+      deliveryDetailsForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const customerName = customerNameInput.value.trim();
+        const deliveryAddress = deliveryAddressInput.value.trim();
+        const phoneNumber = phoneNumberInput.value.trim();
+
+        if (customerName === '' || deliveryAddress === '' || phoneNumber === '') {
+            alert('Please fill in all delivery details.');
+            return;
+        }
+
+        // Store details temporarily or pass them directly
+        // For simplicity, we'll store them in a temporary object
+        const orderDetails = {
+            name: customerName,
+            address: deliveryAddress,
+            phone: phoneNumber
+        };
+        localStorage.setItem('tempOrderDetails', JSON.stringify(orderDetails)); // Save temporarily
+
+        deliveryDetailsModalOverlay.classList.remove('open'); // Close delivery modal
+        checkoutModalOverlay.classList.add('open'); // Open the checkout method modal
+
+        // Clear the form fields after submission (optional, depends on UX preference)
+        deliveryDetailsForm.reset();
+      });
+
+      // Open delivery details modal when 'Proceed to Checkout' is clicked
+      checkoutBtn.addEventListener('click', () => {
+        if (cart.length > 0) {
+          deliveryDetailsModalOverlay.classList.add('open');
+          cartSidebar.classList.remove('open'); // Close cart sidebar when modal opens
+        } else {
+            alert('Your cart is empty. Please add items before proceeding to checkout.');
+        }
+      });
       // --- NEW: Checkout Functionality ---
       const whatsappPhoneNumber = '+2348101507273'; 
       const ownerEmail = 'omonefrancess30@gmail.com'; 
 
-      function generateInvoiceMessage() {
-        let message = `Hello Cakes by Omon!%0A%0AI'd like to place an order:%0A%0A`;
+      function generateInvoiceMessage(name, address, phone) {
+        let message = `Hello Cakes by Omon!%0A%0AI have a new order:%0A%0A`;
+
+        message += `--- Customer Details ---%0A`;
+        message += `Name: ${name}%0A`;
+        message += `Address: ${address}%0A`;
+        message += `Phone: ${phone}%0A%0A`;
+
+        message += `--- Order Details ---%0A`;
         let totalAmount = 0;
 
         cart.forEach(item => {
@@ -621,14 +703,14 @@
         });
 
         message += `%0ATotal Order Amount: ₦${totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%0A%0A`;
-        message += `Please confirm availability and delivery details. Thank you!`;
+        message += `Please confirm availability and delivery. Thank you!`;
         return message;
       }
 
-      // Open checkout modal when 'Proceed to Checkout' is clicked
-      checkoutBtn.addEventListener('click', () => {
+        // Open delivery details modal when 'Proceed to Checkout' is clicked
+        checkoutBtn.addEventListener('click', () => {
         if (cart.length > 0) {
-          checkoutModalOverlay.classList.add('open');
+          deliveryDetailsModalOverlay.classList.add('open');
           cartSidebar.classList.remove('open'); // Close cart sidebar when modal opens
         } else {
             alert('Your cart is empty. Please add items before proceeding to checkout.');
@@ -642,27 +724,42 @@
 
       // Handle WhatsApp checkout
       checkoutWhatsappBtn.addEventListener('click', () => {
-        const invoiceMessage = generateInvoiceMessage();
+        const storedDetails = JSON.parse(localStorage.getItem('tempOrderDetails'));
+        if (!storedDetails) {
+            alert('Delivery details not found. Please re-enter them.');
+            checkoutModalOverlay.classList.remove('open');
+            deliveryDetailsModalOverlay.classList.add('open'); // Re-open delivery modal
+            return;
+        }
+        const invoiceMessage = generateInvoiceMessage(storedDetails.name, storedDetails.address, storedDetails.phone);
         const whatsappUrl = `https://wa.me/${whatsappPhoneNumber}?text=${invoiceMessage}`;
         window.open(whatsappUrl, '_blank');
         checkoutModalOverlay.classList.remove('open'); // Close modal after action
-        // Optional: Clear cart after successful order initiation
-        // cart = [];
-        // renderCart();
+        localStorage.removeItem('tempOrderDetails'); // Clean up temporary storage
+        cart = []; // Clear cart after order initiation
+        renderCart();
       });
 
       // Handle Email checkout
       checkoutEmailBtn.addEventListener('click', () => {
-        const invoiceMessage = generateInvoiceMessage();
+        const storedDetails = JSON.parse(localStorage.getItem('tempOrderDetails'));
+        if (!storedDetails) {
+            alert('Delivery details not found. Please re-enter them.');
+            checkoutModalOverlay.classList.remove('open');
+            deliveryDetailsModalOverlay.classList.add('open'); // Re-open delivery modal
+            return;
+        }
+        const invoiceMessage = generateInvoiceMessage(storedDetails.name, storedDetails.address, storedDetails.phone);
         const subject = encodeURIComponent('Cakes by Omon - New Order Inquiry');
         const emailBody = invoiceMessage; // The message is already URL-encoded
         const mailtoUrl = `mailto:${ownerEmail}?subject=${subject}&body=${emailBody}`;
         window.location.href = mailtoUrl;
         checkoutModalOverlay.classList.remove('open'); // Close modal after action
-        // Optional: Clear cart after successful order initiation
-        // cart = [];
-        // renderCart();
+        localStorage.removeItem('tempOrderDetails'); // Clean up temporary storage
+        cart = []; // Clear cart after order initiation
+        renderCart();
       });
+
 
       // Initial load and render cart
       loadCart();
