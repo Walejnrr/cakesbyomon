@@ -1,0 +1,29 @@
+{
+  "name": "cakesbyomon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "supabase.js",
+  "scripts": {
+    "dev": "vite",        
+    "build": "vite build",
+    "preview": "vite preview" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Walejnrr/cakesbyomon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Walejnrr/cakesbyomon/issues"
+  },
+  "homepage": "https://github.com/Walejnrr/cakesbyomon#readme",
+  "devDependencies": {
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.8"
+  }
+}

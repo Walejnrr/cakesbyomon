@@ -1,0 +1,3 @@
+[build]
+  publish = "/* folder where your products.html is, usually . or build or public */"
+  command = "npm run build-script" # You'll define this below
