@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }, 500); // Wait for fade out
     }
   
-    setInterval(changeImage, 4000); // Change image every 4 seconds
+    setInterval(changeImage, 8000); // Change image every 4 seconds
   }
 
 });
