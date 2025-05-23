@@ -1,2 +1,7 @@
 .env
 node_modules/
+# build output
+/dist
+.vite/
+.DS_Store
+**/.DS_Store
