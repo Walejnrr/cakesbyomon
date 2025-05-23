@@ -69,15 +69,39 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (jumbotronImage) { // Only run if the jumbotron image exists
+    // Set the initial image source (this will make the first image load and then fade in)
+    // Or keep your existing src="images/cake1.jpg" in HTML and let JS handle subsequent changes
+    // Let's ensure the first image fades in correctly too
+    jumbotronImage.style.opacity = 0; // Start invisible
+    jumbotronImage.src = imagesWithCacheBuster(images, currentIndex); // Set first image
+    jumbotronImage.onload = () => { // Fade in once first image is loaded
+      jumbotronImage.style.opacity = 1;
+      jumbotronImage.onload = null; // Clear the onload for initial load
+    };
+  
+  
     function changeImage() {
-      jumbotronImage.style.opacity = 0;
-
+      jumbotronImage.style.opacity = 0; // Start fade out
+  
+      // Wait for the fade-out to complete (500ms)
       setTimeout(() => {
         currentIndex = (currentIndex + 1) % images.length;
-        jumbotronImage.src = imagesWithCacheBuster(images, currentIndex);
-        jumbotronImage.style.opacity = 1;
+        const nextImageUrl = imagesWithCacheBuster(images, currentIndex);
+  
+        // Set the src, and wait for the image to load before fading in
+        jumbotronImage.onload = () => {
+          jumbotronImage.style.opacity = 1; // Fade in once the *new* image is fully loaded
+          jumbotronImage.onload = null; // Important: Clear the onload handler to prevent multiple calls
+        };
+        jumbotronImage.onerror = () => {
+          console.error('Failed to load image:', nextImageUrl);
+          jumbotronImage.style.opacity = 1; // If error, still fade in blank or previous image
+          jumbotronImage.onerror = null; // Clear the onerror handler
+        };
+        jumbotronImage.src = nextImageUrl; // This triggers the image loading
       }, 500); // Wait for fade out
     }
+  
     setInterval(changeImage, 4000); // Change image every 4 seconds
   }
 
