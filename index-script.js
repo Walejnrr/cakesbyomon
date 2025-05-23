@@ -69,74 +69,68 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (jumbotronImage && images.length > 0) {
-    // --- Initial Display Setup (ensure the first image shows smoothly) ---
-    jumbotronImage.style.opacity = 0; // Start hidden
+    // --- Initial Display Setup (no change here) ---
+    jumbotronImage.style.opacity = 0;
     jumbotronImage.src = imagesWithCacheBuster(images, currentIndex);
     jumbotronImage.onload = () => {
-        jumbotronImage.style.opacity = 1; // Fade in the first image
-        jumbotronImage.onload = null; // Clear this specific onload handler
+        jumbotronImage.style.opacity = 1;
+        jumbotronImage.onload = null;
     };
     jumbotronImage.onerror = () => {
         console.error('Failed to load initial jumbotron image:', jumbotronImage.src);
-        jumbotronImage.style.opacity = 1; // Show blank if error
+        jumbotronImage.style.opacity = 1;
         jumbotronImage.onerror = null;
     };
 
 
     // --- Main Slideshow Logic ---
     function changeImage() {
-        // 1. Calculate the index and URL of the *next* image to be displayed
         const nextIndex = (currentIndex + 1) % images.length;
         const nextImageUrl = imagesWithCacheBuster(images, nextIndex);
 
-        // 2. Create a temporary Image object to pre-load the next image in the background
         const tempImage = new Image();
 
-        // 3. Set the onload handler for the TEMPORARY image
-        // This code block runs ONLY AFTER the 'nextImageUrl' has completely downloaded
+        // This block executes ONLY AFTER the 'nextImageUrl' has completely downloaded
         tempImage.onload = () => {
             // console.log('Next image preloaded successfully:', nextImageUrl); // For debugging
 
-            // 4. Now that the next image is ready, start fading out the *current* jumbotron image
+            // 1. Immediately start fading out the CURRENT jumbotron image.
             jumbotronImage.style.opacity = 0; // Initiates the CSS fade-out transition
 
-            // 5. After the fade-out transition completes (500ms timeout),
-            //    swap the source and fade in the *already loaded* new image
+            // 2. Apply a very short delay (e.g., 50ms) to allow the browser
+            //    to register the opacity change before the src swap and fade-in starts.
+            //    This minimizes the "blank" perceived time.
             setTimeout(() => {
                 jumbotronImage.src = nextImageUrl; // Update the actual jumbotron's source
                 jumbotronImage.style.opacity = 1; // Fade in the new image
 
-                // Update the current index for the *next* slideshow cycle
-                currentIndex = nextIndex;
+                currentIndex = nextIndex; // Update the current index for the next cycle
 
-                // Clean up the temporary image's handlers to prevent memory leaks or unexpected behavior
+                // Clean up handlers
                 tempImage.onload = null;
                 tempImage.onerror = null;
-            }, 500); // This 500ms should match your CSS transition duration for opacity
+            }, 50); // *** Reduced delay from 500ms to 50ms ***
         };
 
-        // 6. Set the onerror handler for the TEMPORARY image (fallback if preloading fails)
+        // Error handling for preloading (no change here)
         tempImage.onerror = () => {
             console.error('Failed to preload image (will attempt direct load):', nextImageUrl);
-            // Even if preload fails, still try to proceed with the transition
             jumbotronImage.style.opacity = 0;
             setTimeout(() => {
-                jumbotronImage.src = nextImageUrl; // Attempt to load directly (might still be blank if persistent error)
+                jumbotronImage.src = nextImageUrl;
                 jumbotronImage.style.opacity = 1;
                 currentIndex = nextIndex;
                 tempImage.onload = null;
                 tempImage.onerror = null;
-            }, 500);
+            }, 50); // Still use the reduced delay
         };
 
-        // 7. Trigger the loading of the next image immediately
+        // Trigger the loading of the next image immediately
         tempImage.src = nextImageUrl;
     }
 
-    // --- Start the slideshow interval ---
-    // The 4000ms (4 seconds) represents the total duration for one slide cycle.
-    // This includes the time the image is fully visible and the fade-in/fade-out times.
-    setInterval(changeImage, 4000);
+    // Start the slideshow interval
+    setInterval(changeImage, 5500);
 }
 
 });
