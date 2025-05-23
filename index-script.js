@@ -3,6 +3,7 @@ import cake2 from './images/cake2.jpg';
 import cake3 from './images/cake3.jpg';
 import cake4 from './images/cake4.jpg';
 import cake5 from './images/cake5.jpg';
+
     
 document.addEventListener("DOMContentLoaded", function() {
   // --- Mobile Menu Toggle ---
